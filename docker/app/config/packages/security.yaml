@@ -24,7 +24,10 @@ security:
             pattern: ^/api/auth/token/refresh
             stateless: true
             refresh_jwt: ~
-
+        api_token_validate:
+            pattern: ^/api/auth/token/validate
+            stateless: true
+            jwt: ~
         api:
             pattern: ^/api
             stateless: true
@@ -37,6 +40,7 @@ security:
     access_control:
         - { path: ^/api/auth/token/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/auth/token/refresh, roles: PUBLIC_ACCESS }
+        - { path: ^/api/auth/token/validate,       roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api/users,       roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/user,       roles: IS_AUTHENTICATED_FULLY }
 when@test:
