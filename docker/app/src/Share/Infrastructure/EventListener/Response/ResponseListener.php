@@ -28,6 +28,7 @@ class ResponseListener
             $response->setStatusCode($statusCode);
             $data = $this->transformer->buildResponseData($event->getResponse());
             $response->setData($data);
+            $response->headers->add($event->getResponse()->headers->all());
             $event->setResponse($response);
         }
     }
