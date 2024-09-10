@@ -14,7 +14,7 @@ class TokenCheckAction extends AbstractController
     public function __invoke(): JsonResponse
     {
         $response = new JsonResponse();
-        $response->headers->set('X-User', $this->getUser()->getUlid());
+        $response->headers->set('X-User', json_encode(['ulid' => $this->getUser()->getUlid()]));
         return $response;
     }
 }
