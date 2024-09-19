@@ -43,7 +43,7 @@ services:
     arguments:
       $config:
 #        base_uri: 'http://arch.homework'
-        base_uri: 'http://priceless_dijkstra'
+        base_uri: '%env(BASE_URI_BILLING)%'
         headers:
           Accept: 'application/json'
 
