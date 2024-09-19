@@ -38,6 +38,15 @@ services:
     tags:
       - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
 
+  App\Share\Infrastructure\Services\Billing\Api\Api:
+#    class: App\Share\Infrastructure\Services\Billing\Api
+    arguments:
+      $config:
+#        base_uri: 'http://arch.homework'
+        base_uri: 'http://priceless_dijkstra'
+        headers:
+          Accept: 'application/json'
+
 #  Lexik\Bundle\JWTAuthenticationBundle\Services\KeyLoader\KeyLoaderInterface: '@Lexik\Bundle\JWTAuthenticationBundle\Services\KeyLoader\OpenSSLKeyLoader'
 #
 #  Lexik\Bundle\JWTAuthenticationBundle\Services\KeyLoader\OpenSSLKeyLoader:
