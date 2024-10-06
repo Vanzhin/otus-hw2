@@ -19,7 +19,7 @@ class AddUserAction extends AbstractController
     public function __construct(
         private UserRepository            $repository,
         private UserFactory               $factory,
-        private readonly ServiceInterface $billingService,
+//        private readonly ServiceInterface $billingService,
     )
     {
     }
@@ -28,10 +28,10 @@ class AddUserAction extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
         $user = $this->factory->create($data['email'], $data['password']);
-        $result = $this->billingService->createAccount($user->getUlid());
-        if (!$result->isSuccess()) {
-            throw new \Exception($result->getMessage());
-        };
+//        $result = $this->billingService->createAccount($user->getUlid());
+//        if (!$result->isSuccess()) {
+//            throw new \Exception($result->getMessage());
+//        };
         $this->repository->add($user);
 
         return new JsonResponse(['user_id' => $user->getUlid()]);
