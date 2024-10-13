@@ -27,7 +27,7 @@ class UserMapper
             'age' => new Assert\Optional([
                 new Assert\NotBlank(),
                 new Assert\Type('int'),
-                new Assert\GreaterThan(10),
+                new Assert\GreaterThanOrEqual(18),
                 new Assert\LessThan(100)
             ]),
         ]);
