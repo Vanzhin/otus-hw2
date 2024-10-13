@@ -1,0 +1,42 @@
+framework:
+    messenger:
+        default_bus: message.bus
+        buses:
+            message.bus:
+                default_middleware: allow_no_handlers
+            event.bus:
+                default_middleware: allow_no_handlers
+
+        transports:
+            external_messages_to_forward:
+                dsn: '%env(EXTERNAL_MESSAGE_TRANSPORT_DSN)%'
+                serializer: App\Users\Infrastructure\Serializer\ExternalMessageToForwardSerializer
+                retry_strategy:
+                    max_retries: 3
+                    # milliseconds delay
+                    delay: 1000
+                    # causes the delay to be higher before each retry
+                    # e.g. 1 second delay, 2 seconds, 4 seconds
+                    multiplier: 2
+                    max_delay: 0
+                options:
+                    exchange:
+                        name: 'users'
+                        type: topic
+                        default_publish_routing_key: '#'
+                    queues:
+                        'users_general':
+                            binding_keys: [ '#' ]
+#                            arguments:
+#                                x-message-ttl: 30000 # 30 sec
+                    auto_setup: true
+        routing:
+            # Route your messages to the transports
+            'App\Users\Domain\Message\ExternalMessageToForward': external_messages_to_forward
+# when@test:
+#    framework:
+#        messenger:
+#            transports:
+#                # replace with your transport name here (e.g., my_transport: 'in-memory://')
+#                # For more Messenger testing tools, see https://github.com/zenstruck/messenger-test
+#                async: 'in-memory://'

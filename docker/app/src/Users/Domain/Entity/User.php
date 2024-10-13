@@ -6,10 +6,11 @@ namespace App\Users\Domain\Entity;
 
 use App\Share\Domain\Security\AuthUserInterface;
 use App\Share\Domain\Service\UlidService;
+use App\Share\Domain\Aggregate\Aggregate;
 use App\Users\Domain\Service\UserPasswordHasherInterface;
 use App\Users\Domain\Specification\UserSpecification;
 
-class User implements AuthUserInterface
+class User extends Aggregate implements AuthUserInterface
 {
     private readonly string $ulid;
     private string $email;
@@ -79,5 +80,10 @@ class User implements AuthUserInterface
         }
         $this->userSpecification->passwordUserSpecification->satisfy($password);
         $this->password = $hasher->hash($this, $password);
+    }
+
+    #[\Override] public function getId(): string
+    {
+        return $this->ulid;
     }
 }
