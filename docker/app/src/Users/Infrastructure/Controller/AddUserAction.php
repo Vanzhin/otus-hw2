@@ -48,7 +48,11 @@ class AddUserAction extends AbstractController
 //        };
 
         $this->repository->add($user);
-        $message = new ExternalMessageToForward('user_created', ['name' => $data['name'], 'age' => $data['age'] ?? null]);
+        $message = new ExternalMessageToForward('user_created', [
+            'name' => $data['name'],
+            'age' => $data['age'] ?? null,
+            'user_id' => $user->getId()
+        ]);
         $envelope = new Envelope($message, [new AmqpStamp("#")]);
 
         $this->messageBus->execute($envelope);
