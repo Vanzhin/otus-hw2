@@ -24,8 +24,10 @@ RUN docker-php-ext-install \
         pdo_pgsql \
     && pecl install \
         amqp \
+        apcu \
     && docker-php-ext-enable \
-        amqp
+        amqp \
+        apcu
 
 # копируется файл для php
 COPY php.ini /usr/local/etc/php/php.ini
