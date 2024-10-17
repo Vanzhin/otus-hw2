@@ -24,11 +24,11 @@ framework:
                         name: 'users'
                         type: topic
                         default_publish_routing_key: '#'
-                    queues:
-                        'users_general':
-                            binding_keys: [ '#' ]
-#                            arguments:
-#                                x-message-ttl: 30000 # 30 sec
+                    queues: ~
+#                        'users_general':
+#                            binding_keys: [ '#' ]
+##                            arguments:
+##                                x-message-ttl: 30000 # 30 sec
                     auto_setup: true
         routing:
             # Route your messages to the transports
