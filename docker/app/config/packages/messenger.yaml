@@ -22,7 +22,7 @@ framework:
                 options:
                     exchange:
                         name: 'users'
-                        type: fanout
+                        type: topic
                         default_publish_routing_key: '#'
 #                    queues: ~
 #                        'users_general':
